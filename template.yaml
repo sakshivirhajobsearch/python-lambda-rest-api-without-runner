@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Python REST API on Lambda
+
+Resources:
+  HelloApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.lambda_handler
+      Runtime: python3.10
+      CodeUri: .
+      MemorySize: 128
+      Timeout: 5
+      Events:
+        HelloApi:
+          Type: HttpApi
+          Properties:
+            Path: /hello
+            Method: get
+        DataApi:
+          Type: HttpApi
+          Properties:
+            Path: /data
+            Method: post
